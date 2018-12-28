@@ -7,7 +7,7 @@
     display: none;
 }
 
-.eat-drink-do-selection-page, .category-options, .search-results-list {
+.eat-drink-do-selection-page, .category-options, .search-results-section {
     display: none;
 }
 
@@ -54,7 +54,7 @@ h1 {
 }
 
 
-.search-results-list ul {
+.search-results-section ul {
     list-style-type: none;
 }
 
