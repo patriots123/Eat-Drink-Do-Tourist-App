@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Eat, Drink, Do</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="index.js"></script>
+</head>
+<body>
+    <nav>
+
+    </nav>
+    <section class="home-page page">
+        <h1>Eat, Drink, Do</h1>
+        <p>This is a website is perfect for helping you find day trip activities. 
+            You can find restaurants to eat at, breweries, bars and events to drink at, and various activities to do in a specified area and day.</p>
+        <section class="location-data-entry">
+            <form id="submit-city-town">
+                <label>City/ Town</label>
+                <input type="text" required>
+            </form>
+            <form id="submit-state">
+                <label>State</label>
+                <input type="text" required>
+            </form>
+            <form id="submit-date">
+                <label>Date</label>
+                <input type="text">
+            </form>
+            <button>Submit</button>
+        </section>
+    </section>
+    <section class="eat-drink-do-selection-page page">
+        <button>Eat</button>
+        <button>Drink</button>
+        <button>Do</button>
+    </section>
+    <section class="search-category-results-page page">
+        <section class="category-options">
+            <!-- generate buttons from javascript based on eat, drink, or do clicked -->
+            <button>Restaurants</button>
+            <button>Food Trucks</button>
+        </section>
+        <section class="search-results-list">
+            <!-- generate list items in javascript -->
+            <ul>
+                <li class="result-list-item">
+                    <p>result 1</p>
+                    <p>other information</p>
+                </li>
+                <li>
+                    <p>result 2</p>
+                    <p>other information</p>
+                </li>
+                <li>
+                    <p>result 3</p>
+                    <p>other information</p>
+                </li>
+            </ul>
+        </section>
+    </section>
+</body>
+</html>
