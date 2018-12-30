@@ -53,6 +53,15 @@ h1 {
     margin: 5px;
 }
 
+.category-option-types {
+    text-align: center;
+}
+
+.category-option-type-button {
+    border: 1px solid black;
+    margin: 5px;
+}
+
 
 .search-results-section ul {
     list-style-type: none;

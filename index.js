@@ -1,16 +1,11 @@
 
-let categoryOptions = {
-    eat: ['Restaurants', 'Foodtrucks'],
-    drink: ['Bars', 'Breweries', 'Events'],
-    do: ['Sports', 'Concerts', 'Shopping']
-}
-
 let cityInput;
 let stateInput;
 let dateInput;
 
-let categoryChosen;
-let categoryOptionChosen;
+let categoryChoice;
+let categoryOptionChoice;
+let categoryOptionTypeChoice;
 
 
 function handleLocationDateInput() {
@@ -31,26 +26,59 @@ function handleLocationDateInput() {
 
 
 function generateCategoryOptions() {
-    let specificCategoryOptions = categoryOptions[categoryChosen];
-    for (let i = 0; i < specificCategoryOptions.length; i++) {
-        $('.category-options').append(`<button id='${specificCategoryOptions[i]}' class='category-option-button'>${specificCategoryOptions[i]}</button>`)
-    };
+    let keysForButtonTitles = Object.keys(categoryOptions[categoryChoice]);
+    for (let i = 0; i < keysForButtonTitles.length; i++) {
+        $('.category-options').append(
+            `<button id='${keysForButtonTitles[i]}' class='category-option-button'>${keysForButtonTitles[i]}</button>`)
+    }
     $('.category-options').show();
 }
 
 function handleCategoryDecision() {
     $('.eat-drink-do-selection-page').on('click', '.category-button',function() {
         console.log('category decision made');
-        categoryChosen = $(this).attr('id');
-        console.log(categoryChosen);
+        categoryChoice = $(this).attr('id');
+        console.log(categoryChoice);
         $('.eat-drink-do-selection-page').hide();
         generateCategoryOptions();
     });
 }
 
 
+
+
+function generateCategoryOptionTypes() {
+    $('.category-option-types').empty();
+    let keysForButtonTitles = Object.keys(categoryOptions[categoryChoice][categoryOptionChoice])
+    for (let i = 0; i < keysForButtonTitles.length; i++) {
+        $('.category-option-types').append(
+            `<button id='${keysForButtonTitles[i]}' class='category-option-type-button'>${keysForButtonTitles[i]}</button>`)
+    }
+    $('.category-options').show();
+}
+
+
+function handleCategoryOptionDecision() {
+    $('.category-options').on('click', '.category-option-button', function() {
+        console.log('category option decision made');
+        categoryOptionChoice = $(this).attr('id');
+        console.log(categoryOptionChoice);
+        generateCategoryOptionTypes();
+    });
+}
+
+
+
+
+function formatQueryParams(params) {
+    const queryItems = Object.keys(params)
+      .map(key => `${key}=${params[key]}`)
+    return queryItems.join('&');
+}
+
 function displayResultsContent(responseJson) {
     console.log('display content');
+    $('.search-results-list').empty();
     for (let i = 0; i < responseJson.restaurants.length; i++) {
         $('.search-results-list').append(
             `<li class="result-list-item">
@@ -63,24 +91,15 @@ function displayResultsContent(responseJson) {
     $('.search-results-section').show();
 }
 
-
-function formatQueryParams(params) {
-    const queryItems = Object.keys(params)
-      .map(key => `${key}=${params[key]}`)
-    return queryItems.join('&');
-}
-
-function callRestaurantAPI() {
-    console.log('call restaurant api');
+function callEatDrinkAPI() {
     const apiKey = '67efe258063ce738fec93f327d85c4ab';
     const baseUrl = 'https://developers.zomato.com/api/v2.1/search';
-
     const params = {
         q: cityInput,
-        count: 10,
+        count: 15,
         sort: 'rating',
-        establishment_type: [101,18,275,24,16,1,271,21]
-    }
+        establishment_type: categoryOptions[categoryChoice][categoryOptionChoice][categoryOptionTypeChoice],
+    };
 
     const queryString = formatQueryParams(params)
     const requestUrl = baseUrl + '?' + queryString;
@@ -88,29 +107,31 @@ function callRestaurantAPI() {
     const options = {
         headers: new Headers({
           "user-key": apiKey,
-          "accept": 'application/json',
         })
     };
 
-    console.log('calling restaurant API');
+    console.log('calling eat drink API');
     fetch(requestUrl, options)
     .then(response => response.json())
     .then(responseJson => displayResultsContent(responseJson))
     // .catch(console.log(`Something went wrong`));
 }
 
+
 function getResultContent() {
-    if (categoryOptionChosen === 'Restaurants') {
-        callRestaurantAPI();
+    if ( categoryChoice === 'eat' || categoryChoice === 'drink') {
+        callEatDrinkAPI();
+    } else {
+        // Do
     }
 }
 
-function handleCategoryOptionDecision() {
-    $('.category-options').on('click', '.category-option-button', function() {
-        console.log('category option decision made');
-        categoryOptionChosen = $(this).attr('id');
-        console.log(categoryOptionChosen);
-        $('.eat-drink-do-selection-page').hide();
+function handleCategoryOptionTypeDecision() {
+    $('.category-option-types').on('click', '.category-option-type-button',function() {
+        console.log('category option type decision made');
+        categoryOptionTypeChoice = $(this).attr('id');
+        console.log(categoryOptionTypeChoice);
+        // callEatDrinkAPI();
         getResultContent();
     });
 }
@@ -123,6 +144,7 @@ function runApp() {
     handleLocationDateInput();
     handleCategoryDecision();
     handleCategoryOptionDecision();
+    handleCategoryOptionTypeDecision();
 }
 
 $(runApp);
