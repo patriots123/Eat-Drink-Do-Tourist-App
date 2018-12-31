@@ -8,6 +8,14 @@ let categoryChoice;
 let categoryOptionChoice;
 let categoryOptionTypeChoice;
 
+
+function formatQueryParams(params) {
+    const queryItems = Object.keys(params)
+      .map(key => `${key}=${params[key]}`)
+    return queryItems.join('&');
+}
+
+
 function matchCityFromAPI(responseJson) {
     for (let i = 0; i < responseJson.location_suggestions.length; i++) {
     console.log(responseJson.location_suggestions[i].name);
@@ -26,7 +34,7 @@ function getZomatoCityID() {
         q: cityInput,
     };
     const queryString = formatQueryParams(params)
-    const requestUrl = citiesBaseUrl + '?' + queryString;
+    const requestUrl = apiInfo.zomato.citiesBaseUrl + '?' + queryString;
 
     const options = {
         headers: new Headers({
@@ -40,7 +48,7 @@ function getZomatoCityID() {
 }
 
 
-// save city, state, and date when the user hits submit and change pages
+// save city, state, and date when the user hits submit and change pages, then find city id needed for Eat workflow
 function handleLocationDateInput() {
     $('#location-data-entry').submit('click', event => {
         event.preventDefault();
@@ -96,6 +104,8 @@ function generateCategoryOptionTypes() {
             $('.category-option-types').append(
                 `<button id='${categoryOptions[categoryChoice][categoryOptionChoice][i]}' class='category-option-type-button'>${categoryOptions[categoryChoice][categoryOptionChoice][i]}</button>`)
         }
+    } else if (categoryChoice == 'do') {
+        callDoAPI();
     }
     $('.category-options').show();
 }
@@ -113,11 +123,6 @@ function handleCategoryOptionDecision() {
 
 
 
-function formatQueryParams(params) {
-    const queryItems = Object.keys(params)
-      .map(key => `${key}=${params[key]}`)
-    return queryItems.join('&');
-}
 
 function displayEatResults(responseJson) {
     console.log(categoryOptionChoice);
@@ -162,8 +167,15 @@ function callEatAPI() {
     console.log('calling eat API');
     fetch(requestUrl, options)
     .then(response => response.json())
-    .then(responseJson => displayEatResults(responseJson))
-    // .catch(console.log(`Something went wrong`));
+    .then(responseJson => {
+        if (responseJson.restaurants.length == 0) {
+            console.log('empty reponse array for restaurants')
+            throw new Error();
+        }
+        cityID = displayEatResults(responseJson)
+    })
+    //.then(responseJson => displayEatResults(responseJson))
+    .catch($('.search-results-list').append(`<p>No results for ${cityInput}, ${stateInput}`));
 }
 
 function displayDrinkResults(responseJson) {
@@ -176,7 +188,8 @@ function displayDrinkResults(responseJson) {
                     <p>${responseJson[i].street} ${responseJson[i].city}, ${responseJson[i].state}</p>
                     <p>${responseJson[i].overall}</p>
                 </li>`
-            );}
+            );
+        }
     }
     $('.search-results-section').show();
 }
@@ -190,6 +203,40 @@ function callDrinkAPI() {
     fetch(requestUrl)
     .then(response => response.json())
     .then(responseJson => displayDrinkResults(responseJson))
+    //.catch(err => console.log('something went wrong'));
+}
+
+function displayDoResults(responseJson) {
+    console.log(responseJson);
+    $('.search-results-list').empty();
+    for (let i = 0; i < responseJson.events.length; i++) {
+        $('.search-results-list').append(
+            `<li class="result-list-item">
+                <p>${responseJson.events[i].title}</p>
+                <p>${responseJson.events[i].datetime_local}</p>
+                <p>${responseJson.events[i].venue.name}</p>
+                <p>${responseJson.events[i].venue.address} ${responseJson.events[i].venue.city}, ${responseJson.events[i].venue.state}</p>
+            </li>`
+        );
+    }
+    $('.search-results-section').show();
+}
+
+function callDoAPI() {
+    const params = {
+        client_id: apiInfo.seatGeek.key,
+        datetime_utc: dateInput,
+        'venue.city': cityInput,
+        'venue.state': stateInput,
+    };
+    const queryString = formatQueryParams(params)
+    const requestUrl = apiInfo.seatGeek.eventsBaseUrl + '?' + queryString;
+    console.log(requestUrl);
+    
+    console.log('calling do API');
+    fetch(requestUrl)
+    .then(response => response.json())
+    .then(responseJson => displayDoResults(responseJson))
     // .catch(console.log(`Something went wrong`));
 }
 
@@ -199,8 +246,6 @@ function getResultContent() {
         callEatAPI();
     } else if (categoryChoice === 'drink') {
         callDrinkAPI();
-    } else {
-        // Do
     }
 }
 
@@ -215,9 +260,7 @@ function handleCategoryOptionTypeDecision() {
 
 
 
-
 function runApp() {
-    console.log('app running');
     handleLocationDateInput();
     handleCategoryDecision();
     handleCategoryOptionDecision();

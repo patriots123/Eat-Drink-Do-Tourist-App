@@ -54,6 +54,10 @@ main, header {
     display: none;
 }
 
+form label {
+    display: none;
+}
+
 .eat-drink-do-selection-page, .category-options, .search-results-section {
     display: none;
 }
