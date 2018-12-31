@@ -29,7 +29,6 @@ nav li {
 }
 
 nav li::after {
-  content: "|";
   margin-left: 5px;
 }
 
@@ -58,7 +57,7 @@ form label {
     display: none;
 }
 
-.eat-drink-do-selection-page, .category-options, .search-results-section {
+.eat-drink-do-selection-page, .category-options, .search-results-section, .change-loc-nav-link, .choose-eat-drink-do-nav-link {
     display: none;
 }
 

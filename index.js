@@ -48,6 +48,20 @@ function getZomatoCityID() {
 }
 
 
+function handleNavBarLinks() {
+    $('.change-loc-nav-link').on('click', function() {
+        $('.home-page').show();
+        $('.category-options, .category-option-types, .search-results-section').hide();
+        $('.eat-drink-do-selection-page').hide();
+        $('.change-loc-nav-link, .choose-eat-drink-do-nav-link').hide();
+    });
+    $('.choose-eat-drink-do-nav-link').on('click', function() {
+        $('.eat-drink-do-selection-page').show();
+        $('.category-options, .category-option-types, .search-results-section').hide();
+        $('.choose-eat-drink-do-nav-link').hide();
+    });
+}
+
 // save city, state, and date when the user hits submit and change pages, then find city id needed for Eat workflow
 function handleLocationDateInput() {
     $('#location-data-entry').submit('click', event => {
@@ -59,6 +73,7 @@ function handleLocationDateInput() {
         console.log(`city: ${cityInput}, state: ${stateInput}, date: ${dateInput}`);
         $('.home-page').hide();
         $('.eat-drink-do-selection-page').show();
+        $('.change-loc-nav-link').show();
         getZomatoCityID();
     });
 }
@@ -68,6 +83,7 @@ function handleLocationDateInput() {
 
 //generate HTML for category options (ex. Restaurants/ Foodtrucks for Eat)
 function generateCategoryOptions() {
+    $('.category-options').empty();
     let keysForButtonTitles = Object.keys(categoryOptions[categoryChoice]);
     for (let i = 0; i < keysForButtonTitles.length; i++) {
         $('.category-options').append(
@@ -83,6 +99,7 @@ function handleCategoryDecision() {
         categoryChoice = $(this).attr('id');
         console.log(categoryChoice);
         $('.eat-drink-do-selection-page').hide();
+        $('.choose-eat-drink-do-nav-link').show();
         generateCategoryOptions();
     });
 }
@@ -107,7 +124,7 @@ function generateCategoryOptionTypes() {
     } else if (categoryChoice == 'do') {
         callDoAPI();
     }
-    $('.category-options').show();
+    $('.category-option-types').show();
 }
 
 //After user clicks one of the category option buttons, call function to generate last set of decision buttons
@@ -261,6 +278,7 @@ function handleCategoryOptionTypeDecision() {
 
 
 function runApp() {
+    handleNavBarLinks();
     handleLocationDateInput();
     handleCategoryDecision();
     handleCategoryOptionDecision();
