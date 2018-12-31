@@ -3,6 +3,53 @@
     box-sizing: border-box;
 }
 
+body {
+    margin: 0;
+}
+
+.container {
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+nav {
+  height: 60px;
+  background-color: grey;
+  position: fixed;
+  width: 100%;
+}
+
+nav ul {
+  display: inline-block;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+}
+
+nav li::after {
+  content: "|";
+  margin-left: 5px;
+}
+
+nav button:hover {
+  cursor: pointer;
+}
+
+nav .icon-img {
+  height: 50px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 1px solid black;
+}
+
+main, header {
+    padding-top: 80px;
+}
+
 .hidden {
     display: none;
 }
@@ -55,6 +102,7 @@ h1 {
 
 .category-option-types {
     text-align: center;
+    padding:10px;
 }
 
 .category-option-type-button {

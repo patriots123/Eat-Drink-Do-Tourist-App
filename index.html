@@ -12,38 +12,45 @@
     <script src="index.js"></script>
 </head>
 <body>
-    <nav>
-
-    </nav>
-    <section class="home-page page">
-        <h1>Eat, Drink, Do</h1>
-        <p>This is a website is perfect for helping you find day trip activities. 
-            You can find restaurants to eat at, breweries, bars and events to drink at, and various activities to do in a specified area and day.</p>
-        <form id="location-data-entry">
-            <label>City/ Town</label>
-            <input id="submit-city-town" type="text" required>
-            <label>State</label>
-            <input id="submit-state" type="text" required>
-            <label>Date</label>
-            <input id="submit-date" type="date" required>
-            <button type="submit">Submit</button>
-        </form>
-    </section>
-    <section class="eat-drink-do-selection-page page">
-        <button class="category-button" id="eat">Eat</button>
-        <button class="category-button" id="drink">Drink</button>
-        <button class="category-button" id="do">Do</button>
-    </section>
-    <section class="category-options">
-
-    </section>
-    <section class="category-option-types">
-
-    </section>
-    <section class="search-results-section">
-        <ul class="search-results-list">
-
+    <nav role="navigation" class="container">
+        <ul>
+            <li><button>Change Location</button></li>
+            <li><button>Choose Eat, Drink, Do</button></li>
         </ul>
-    </section>
+    </nav>
+    <header>
+        <h1>Eat, Drink, Do</h1>
+    </header>
+    <main>
+        <section class="home-page page">
+            <p>This is a website is perfect for helping you find day trip activities. 
+                You can find restaurants to eat at, breweries, bars and events to drink at, and various activities to do in a specified area and day.</p>
+            <form id="location-data-entry">
+                <label>City/ Town</label>
+                <input id="submit-city-town" type="text" required>
+                <label>State</label>
+                <input id="submit-state" type="text" required>
+                <label>Date</label>
+                <input id="submit-date" type="date" required>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+        <section class="eat-drink-do-selection-page page">
+            <button class="category-button" id="eat">Eat</button>
+            <button class="category-button" id="drink">Drink</button>
+            <button class="category-button" id="do">Do</button>
+        </section>
+        <section class="category-options">
+
+        </section>
+        <section class="category-option-types">
+
+        </section>
+        <section class="search-results-section">
+            <ul class="search-results-list">
+
+            </ul>
+        </section>
+    </main>
 </body>
 </html>
