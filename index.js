@@ -51,9 +51,11 @@ function getZomatoCityID() {
 function handleNavBarLinks() {
     $('.change-loc-nav-link').on('click', function() {
         $('.home-page').show();
+        $('.homepage-title').show();
         $('.category-options, .category-option-types, .search-results-section').hide();
         $('.eat-drink-do-selection-page').hide();
         $('.change-loc-nav-link, .choose-eat-drink-do-nav-link').hide();
+        $('nav, .nav-title').hide();
     });
     $('.choose-eat-drink-do-nav-link').on('click', function() {
         $('.eat-drink-do-selection-page').show();
@@ -72,8 +74,10 @@ function handleLocationDateInput() {
         dateInput = $('#submit-date').val();
         console.log(`city: ${cityInput}, state: ${stateInput}, date: ${dateInput}`);
         $('.home-page').hide();
+        $('nav').show();
         $('.eat-drink-do-selection-page').show();
         $('.change-loc-nav-link').show();
+        $('.nav-title').show();
         getZomatoCityID();
     });
 }
@@ -87,7 +91,7 @@ function generateCategoryOptions() {
     let keysForButtonTitles = Object.keys(categoryOptions[categoryChoice]);
     for (let i = 0; i < keysForButtonTitles.length; i++) {
         $('.category-options').append(
-            `<button id='${keysForButtonTitles[i]}' class='category-option-button'>${keysForButtonTitles[i]}</button>`)
+            `<button id='${keysForButtonTitles[i]}' class='category-option-button blue-button'>${keysForButtonTitles[i]}</button>`)
     }
     $('.category-options').show();
 }
@@ -114,12 +118,12 @@ function generateCategoryOptionTypes() {
         let keysForButtonTitles = Object.keys(categoryOptions[categoryChoice][categoryOptionChoice])
         for (let i = 0; i < keysForButtonTitles.length; i++) {
             $('.category-option-types').append(
-                `<button id='${keysForButtonTitles[i]}' class='category-option-type-button'>${keysForButtonTitles[i]}</button>`)
+                `<button id='${keysForButtonTitles[i]}' class='category-option-type-button blue-button'>${keysForButtonTitles[i]}</button>`)
         }
     } else if (categoryChoice == 'drink') {
         for (let i = 0; i < categoryOptions[categoryChoice][categoryOptionChoice].length; i++) {
             $('.category-option-types').append(
-                `<button id='${categoryOptions[categoryChoice][categoryOptionChoice][i]}' class='category-option-type-button'>${categoryOptions[categoryChoice][categoryOptionChoice][i]}</button>`)
+                `<button id='${categoryOptions[categoryChoice][categoryOptionChoice][i]}' class='category-option-type-button blue-button'>${categoryOptions[categoryChoice][categoryOptionChoice][i]}</button>`)
         }
     } else if (categoryChoice == 'do') {
         callDoAPI();
@@ -148,17 +152,21 @@ function displayEatResults(responseJson) {
         if (categoryOptionChoice === 'Restaurants') {
             $('.search-results-list').append(
                 `<li class="result-list-item">
-                    <p>${responseJson.restaurants[i].restaurant.name}</p>
-                    <p>${responseJson.restaurants[i].restaurant.location.address}</p>
-                    <p>${responseJson.restaurants[i].restaurant.user_rating.aggregate_rating}</p>
+                    <h3>${responseJson.restaurants[i].restaurant.name}</h3>
+                    <p>Cuisine(s): ${responseJson.restaurants[i].restaurant.cuisines}</p>
+                    <p>Address: ${responseJson.restaurants[i].restaurant.location.address}</p>
+                    <p>Rating: ${responseJson.restaurants[i].restaurant.user_rating.aggregate_rating}</p>
+                    <p><a href = ${responseJson.restaurants[i].restaurant.url}</a>Check Out This Link For More Info!</p>
                 </li>`
             );
         } else if (categoryOptionChoice === 'Foodtrucks') {
             $('.search-results-list').append(
                 `<li class="result-list-item">
-                    <p>${responseJson.restaurants[i].restaurant.name}</p>
-                    <p>${responseJson.restaurants[i].restaurant.location.locality_verbose}</p>
-                    <p>${responseJson.restaurants[i].restaurant.user_rating.aggregate_rating}</p>
+                    <h3>${responseJson.restaurants[i].restaurant.name}</h3>
+                    <p>Cuisine(s): ${responseJson.restaurants[i].restaurant.cuisines}</p>
+                    <p>Address: ${responseJson.restaurants[i].restaurant.location.locality_verbose}</p>
+                    <p>Rating: ${responseJson.restaurants[i].restaurant.user_rating.aggregate_rating}</p>
+                    <p><a href = ${responseJson.restaurants[i].restaurant.url}</a>Check Out This Link For More Info!</p>
                 </li>`
             );
         }
@@ -201,17 +209,16 @@ function displayDrinkResults(responseJson) {
         if (responseJson[i].status ===  categoryOptionTypeChoice) {
             $('.search-results-list').append(
                 `<li class="result-list-item">
-                    <p>${responseJson[i].name}</p>
-                    <p>${responseJson[i].street} ${responseJson[i].city}, ${responseJson[i].state}</p>
-                    <p>${responseJson[i].overall}</p>
+                    <h3>${responseJson[i].name}</h3>
+                    <p>Address: ${responseJson[i].street} ${responseJson[i].city}, ${responseJson[i].state}</p>
+                    <p><a href = ${responseJson[i].url}>Check Out This Link For More Info!</a></p>
+                    <p><a href = ${responseJson[i].reviewlink}>See Customer Reviews!</a></p>
                 </li>`
             );
         }
     }
     $('.search-results-section').show();
 }
-
-
 
 function callDrinkAPI() {
     const requestUrl = apiInfo.beerMapping.loccityUrl + `${apiInfo.beerMapping.key}/${cityInput},${stateInput}&s=json`
@@ -229,10 +236,11 @@ function displayDoResults(responseJson) {
     for (let i = 0; i < responseJson.events.length; i++) {
         $('.search-results-list').append(
             `<li class="result-list-item">
-                <p>${responseJson.events[i].title}</p>
-                <p>${responseJson.events[i].datetime_local}</p>
-                <p>${responseJson.events[i].venue.name}</p>
-                <p>${responseJson.events[i].venue.address} ${responseJson.events[i].venue.city}, ${responseJson.events[i].venue.state}</p>
+                <h3>${responseJson.events[i].title}</h3>
+                <p>Time: ${responseJson.events[i].datetime_local}</p>
+                <p>Location: ${responseJson.events[i].venue.name}</p>
+                <p>Location Address: ${responseJson.events[i].venue.address} ${responseJson.events[i].venue.city}, ${responseJson.events[i].venue.state}</p>
+                <p><a href = ${responseJson.events[i].url}>Buy Tickets Here!</a></p>
             </li>`
         );
     }

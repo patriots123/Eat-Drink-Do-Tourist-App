@@ -6,42 +6,44 @@
     <title>Eat, Drink, Do</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Find a food, drink, and activities in a specified town or city">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="data.js"></script>
     <script src="index.js"></script>
 </head>
 <body>
-    <nav role="navigation" class="container">
+    <nav role="navigation">
+        <h1 class="nav-title">Eat, Drink, Do</h1>
         <ul>
             <li><button class="change-loc-nav-link">Change Location</button></li>
             <li><button class="choose-eat-drink-do-nav-link">Choose Eat, Drink, Do</button></li>
         </ul>
     </nav>
-    <header>
-        <h1>Eat, Drink, Do</h1>
-    </header>
     <main>
         <section class="home-page page">
-            <p>This is a website is perfect for helping you find day trip activities. 
+            <h1 class="home-page-title">Eat, Drink, Do</h1>
+            <p class="page-description">This website is perfect for helping you find day trip activities. 
                 You can find restaurants to eat at, breweries, bars and events to drink at, and various activities to do in a specified area and day.</p>
+            <p class="page-instructions">Enter your City/ Town, State, and Date you want information for. Follow the example inputs.</p>
             <form id="location-data-entry">
                 <label>City/ Town</label>
-                <input id="submit-city-town" type="text" placeholder="City (Ex: Boston)" required>
+                <input id="submit-city-town" type="text" placeholder="City (Ex: Boston)"required> 
                 <label>State</label>
                 <input id="submit-state" type="text" placeholder="State (Ex: MA)" required>
                 <label>Date</label>
                 <input id="submit-date" type="date" required>
-                <button type="submit">Submit</button>
+                <button type="submit" class="blue-button">Submit</button>
             </form>
         </section>
         <section class="eat-drink-do-selection-page page">
-            <button class="category-button" id="eat"><i class="fa fa-bell"></i> Eat</button>
-            <button class="category-button" id="drink">Drink</button>
-            <button class="category-button" id="do">Do</button>
+            <button class="category-button blue-button" id="eat"><i class="material-icons">restaurant</i> Eat</button>
+            <button class="category-button blue-button" id="drink"><i class="material-icons">local_bar</i>Drink</button>
+            <button class="category-button blue-button" id="do"><i class="material-icons">local_play</i>Do</button>
         </section>
-         <!-- <section class="results-page"> -->
+        <section class="results-page">
             <section class="category-options">
 
             </section>
@@ -53,7 +55,7 @@
 
                 </ul>
             </section>
-        <!-- </section> -->
+        </section>
     </main>
 </body>
 </html>
