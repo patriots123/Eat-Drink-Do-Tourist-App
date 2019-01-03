@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,35 +21,35 @@
             <li><button class="choose-eat-drink-do-nav-link">Choose Eat, Drink, Do</button></li>
         </ul>
     </nav>
-    <main>
-        <section class="home-page page">
+    <main role="main">
+        <section class="home-page page" role="region">
             <h1 class="home-page-title">Eat, Drink, Do</h1>
             <p class="page-description">This website is perfect for helping you find day trip activities. 
                 You can find restaurants to eat at, breweries, bars and events to drink at, and various activities to do in a specified area and day.</p>
             <p class="page-instructions">Enter your City/ Town, State, and Date you want information for. Follow the example inputs.</p>
             <form id="location-data-entry">
-                <label>City/ Town</label>
-                <input id="submit-city-town" type="text" placeholder="City (Ex: Boston)"required> 
-                <label>State</label>
-                <input id="submit-state" type="text" placeholder="State (Ex: MA)" required>
-                <label>Date</label>
-                <input id="submit-date" type="date" required>
+                <label for="submit-city-town">City/ Town</label>
+                <input id="submit-city-town" type="text" placeholder="City (Ex: Boston)" name="submit-city-town" required> 
+                <label for="submit-state">State</label>
+                <input id="submit-state" type="text" placeholder="State (Ex: MA)" name="submit-state" required>
+                <label for="submit-state">Date</label>
+                <input id="submit-date" type="date" name="submite-state" required>
                 <button type="submit" class="blue-button">Submit</button>
             </form>
         </section>
-        <section class="eat-drink-do-selection-page page">
+        <section class="eat-drink-do-selection-page page" role="region">
             <button class="category-button blue-button" id="eat"><i class="material-icons">restaurant</i> Eat</button>
             <button class="category-button blue-button" id="drink"><i class="material-icons">local_bar</i>Drink</button>
             <button class="category-button blue-button" id="do"><i class="material-icons">local_play</i>Do</button>
         </section>
-        <section class="results-page">
-            <section class="category-options">
+        <section class="results-page" role="region">
+            <section class="category-options" role="region">
 
             </section>
-            <section class="category-option-types">
+            <section class="category-option-types" role="region">
 
             </section>
-            <section class="search-results-section">
+            <section class="search-results-section" role="region">
                 <ul class="search-results-list">
 
                 </ul>
