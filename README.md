@@ -2,7 +2,7 @@
 
 ## Link
 
-[Eat, Drink, Go Web App](https://github.com/patriots123/api-capstone.git)
+[Eat, Drink, Go Web App](file:///Users/WillShaughnessy/Desktop/Thinkful_Projects/API-capstone/index.html)
 
 ## Summary
 
@@ -17,19 +17,19 @@ city on the date they picked. More things to do in later versions.
 ## Screenshots
 Landing Page/ Data Entry:
 
-![Landing Page/ Data Entry](category_option_buttons.jpg)
+![Landing Page/ Data Entry](Desktop/Thinkful_Projects/API-capstone/Screenshots_for_README/category_option_buttons.jpg)
 
 Category Choices:
 
-![Category Choices](screenshots/about.png)
+[Category Choices](Desktop/Thinkful_Projects/API-capstone/Screenshots_for_README/category_option_buttons.jpg)
 
 Category Options:
 
-![Category Options](screenshots/library.png)
+![Category Options](Desktop/Thinkful_Projects/API-capstone/Screenshots_for_README/category_option_buttons.jpg)
 
 Category Option Types:
 
-![Category Option Types](screenshots/recommendations.png)
+![Category Option Types](Desktop/Thinkful_Projects/API-capstone/Screenshots_for_README/category_option_buttons.jpg)
 
 ## Technologies Used
 
