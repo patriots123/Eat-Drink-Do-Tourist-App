@@ -34,7 +34,7 @@ Category Option Types:
 
 Search Results:
 
-![Category Option Types](Desktop/Thinkful_Projects/API-capstone/Screenshots_for_README/search_results.jpg)
+![Search Results](Desktop/Thinkful_Projects/API-capstone/Screenshots_for_README/search_results.jpg)
 
 ## Technologies Used
 
