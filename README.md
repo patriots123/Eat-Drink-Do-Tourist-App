@@ -2,7 +2,8 @@
 
 ## Link
 
-[Eat, Drink, Go Web App](file:///Users/WillShaughnessy/Desktop/Thinkful_Projects/API-capstone/index.html)
+[Eat, Drink, Go Web App](https://eat-drink-do--wshaughnessy.repl.co/)
+[Repository](https://github.com/patriots123/Eat-Drink-Do-Tourist-App)
 
 ## Summary
 
