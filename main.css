@@ -3,21 +3,29 @@
     box-sizing: border-box;
 }
 
+html { 
+    background: url(https://media.timeout.com/images/105287032/image.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
 body {
     margin: 0;
-    padding: 20px;
-    padding-top:0;
-    padding-left: 0;
 }
 
 nav {
   height: 60px;
   padding-left: 60px;
   padding-right: 60px;
-  background-color: grey;
   position: fixed;
   width: 100%;
   background-color: cornflowerblue;
+}
+
+.error-message {
+    color: red;
 }
 
 h1 {
@@ -29,12 +37,14 @@ h1 {
     color: white;
 }
 
+.blue-button:hover {
+    cursor: pointer;
+}
+
 .nav-title {
     color: white;
     vertical-align: middle;
     float: left;
-    justify-content: center; 
-    flex-direction: column;
 }
 
 nav ul {
@@ -65,28 +75,31 @@ header {
     padding-top: 80px;
 }
 
-.hidden {
-    display: none;
-}
-
 .eat-drink-do-selection-page, .category-options, .search-results-section, .change-loc-nav-link, .choose-eat-drink-do-nav-link, nav, .nav-title {
     display: none;
 }
 
-/* .home-page {
+.home-page {
+    max-width: 500px;
+    padding: 10px;
     border: 1px solid cornflowerblue;
-    border-radius: 15%;
-} */
+    border-radius: 5%;
+    margin-top: 50px;
+    background-color: white;
+}
 
 .home-page-title {
     color: royalblue;
     margin-top: 50px;
     font-size: 24pt;
     text-align: center;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .home-page p {
-    max-width: 500px;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -96,29 +109,25 @@ header {
 }
 
 .page-description {
-    margin-top: 100px;
+    margin-top: 50px;
 }
-/* 
-main {
-    position: relative;
-} */
 
 .eat-drink-do-selection-page, .results-page {
-    /* margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%); */
     padding-top: 120px;
     text-align: center;
 }
 
 
+/* .eat-drink-do-selection-page {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+} */
+
 form {
     text-align: center;
-    margin-top: 80px;
-    max-width: 500px;
+    margin-top: 50px;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
     padding: 15px;
@@ -130,8 +139,6 @@ form label {
 
 form input {
     text-align: left;
-    /* margin-left: auto;
-    margin-right: auto; */
     display: block;
     margin-top: 15px;
     margin-bottom: 15px;
@@ -143,15 +150,13 @@ form input {
 }
 
 form button {
-    background-color: cornflowerblue;
-    color: white;
     width: 100%;
     height: 30px;
     font-size: 16px;
 }
 
 .page {
-    max-width: 1000px;
+    /* max-width: 1000px; */
     margin-left: auto;
     margin-right: auto;
 }
@@ -162,19 +167,14 @@ form button {
 
 .category-button {
     border: 0px;
-    /* border: 1px solid black; */
     padding: 40px;
     margin-left: 5px;
     margin-right: 5px;
     width: 30%;
-    /* height: 30px; */
     margin: auto;
-    /* display: flex; */
     text-align: center;
     display: inline-block;
     vertical-align:middle;
-    background-color: cornflowerblue;
-    color: white;
     font-size: 30pt;
 }
 
@@ -197,8 +197,6 @@ form button {
     padding: 20px;
     width: 100%;
     margin: 5px;
-    background-color: cornflowerblue;
-    color: white;
     font-size: 20pt;
 }
 
@@ -210,8 +208,6 @@ form button {
 .category-option-type-button {
     border: 1px solid black;
     margin: 5px;
-    background-color: cornflowerblue;
-    color: white;
     font-size: 12pt;
 }
 
@@ -219,7 +215,7 @@ form button {
     text-align: left;
     margin-left: auto;
     margin-right: auto;
-    max-width: 1000px;
+    max-width: 700px;
     padding-left: 15px;
     padding-right: 15px;
 }
@@ -235,6 +231,7 @@ form button {
     box-shadow: 5px 5px cornflowerblue;
     border: 1px solid cornflowerblue;
     padding-left: 10px;
+    background-color: white;
 }
 
 .result-list-item h3 {

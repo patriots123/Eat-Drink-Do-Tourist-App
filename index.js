@@ -50,6 +50,11 @@ function getZomatoCityID() {
 
 function handleNavBarLinks() {
     $('.change-loc-nav-link').on('click', function() {
+        cityInput = '';
+        stateInput = '';
+        dateInput = '';
+        zomatoCityID = undefined;
+        $('.search-results-list').empty();
         $('.home-page').show();
         $('.homepage-title').show();
         $('.category-options, .category-option-types, .search-results-section').hide();
@@ -58,6 +63,7 @@ function handleNavBarLinks() {
         $('nav, .nav-title').hide();
     });
     $('.choose-eat-drink-do-nav-link').on('click', function() {
+        $('.search-results-list').empty();
         $('.eat-drink-do-selection-page').show();
         $('.category-options, .category-option-types, .search-results-section').hide();
         $('.choose-eat-drink-do-nav-link').hide();
@@ -123,7 +129,8 @@ function generateCategoryOptionTypes() {
     } else if (categoryChoice == 'drink') {
         for (let i = 0; i < categoryOptions[categoryChoice][categoryOptionChoice].length; i++) {
             $('.category-option-types').append(
-                `<button id='${categoryOptions[categoryChoice][categoryOptionChoice][i]}' class='category-option-type-button blue-button'>${categoryOptions[categoryChoice][categoryOptionChoice][i]}</button>`)
+                `<button id='${categoryOptions[categoryChoice][categoryOptionChoice][i]}' 
+                class='category-option-type-button blue-button'>${categoryOptions[categoryChoice][categoryOptionChoice][i]}</button>`)
         }
     } else if (categoryChoice == 'do') {
         callDoAPI();
@@ -156,7 +163,7 @@ function displayEatResults(responseJson) {
                     <p>Cuisine(s): ${responseJson.restaurants[i].restaurant.cuisines}</p>
                     <p>Address: ${responseJson.restaurants[i].restaurant.location.address}</p>
                     <p>Rating: ${responseJson.restaurants[i].restaurant.user_rating.aggregate_rating}</p>
-                    <p><a href = ${responseJson.restaurants[i].restaurant.url}</a>Check Out This Link For More Info!</p>
+                    <p><a target="_blank" href = ${responseJson.restaurants[i].restaurant.url}</a>Check Out This Link For More Info!</p>
                 </li>`
             );
         } else if (categoryOptionChoice === 'Foodtrucks') {
@@ -166,7 +173,7 @@ function displayEatResults(responseJson) {
                     <p>Cuisine(s): ${responseJson.restaurants[i].restaurant.cuisines}</p>
                     <p>Address: ${responseJson.restaurants[i].restaurant.location.locality_verbose}</p>
                     <p>Rating: ${responseJson.restaurants[i].restaurant.user_rating.aggregate_rating}</p>
-                    <p><a href = ${responseJson.restaurants[i].restaurant.url}</a>Check Out This Link For More Info!</p>
+                    <p><a target="_blank" href = ${responseJson.restaurants[i].restaurant.url}</a>Check Out This Link For More Info!</p>
                 </li>`
             );
         }
@@ -193,14 +200,17 @@ function callEatAPI() {
     fetch(requestUrl, options)
     .then(response => response.json())
     .then(responseJson => {
-        if (responseJson.restaurants.length == 0) {
-            console.log('empty reponse array for restaurants')
+        if (zomatoCityID == undefined) {
+            console.log('empty reponse array for restaurants');
             throw new Error();
+        } else {
+            displayEatResults(responseJson);
         }
-        cityID = displayEatResults(responseJson)
     })
-    //.then(responseJson => displayEatResults(responseJson))
-    .catch($('.search-results-list').append(`<p>No results for ${cityInput}, ${stateInput}`));
+    .catch(function() {
+        $('.search-results-list').append(`<p class="error-message">No results for ${cityInput}, ${stateInput}. Please fix city, state input.`);
+        $('.search-results-section').show();
+    });
 }
 
 function displayDrinkResults(responseJson) {
@@ -211,8 +221,8 @@ function displayDrinkResults(responseJson) {
                 `<li class="result-list-item">
                     <h3>${responseJson[i].name}</h3>
                     <p>Address: ${responseJson[i].street} ${responseJson[i].city}, ${responseJson[i].state}</p>
-                    <p><a href = ${responseJson[i].url}>Check Out This Link For More Info!</a></p>
-                    <p><a href = ${responseJson[i].reviewlink}>See Customer Reviews!</a></p>
+                    <p><a target="_blank" href = ${responseJson[i].url}>Check Out This Link For More Info!</a></p>
+                    <p><a target="_blank" href = ${responseJson[i].reviewlink}>See Customer Reviews!</a></p>
                 </li>`
             );
         }
@@ -226,8 +236,19 @@ function callDrinkAPI() {
     console.log('calling drink API');
     fetch(requestUrl)
     .then(response => response.json())
-    .then(responseJson => displayDrinkResults(responseJson))
-    //.catch(err => console.log('something went wrong'));
+    .then(responseJson => {
+        if (responseJson.length == 1) {
+            console.log('empty reponse array for restaurants');
+            throw new Error();
+        } else {
+            displayDrinkResults(responseJson);
+        }
+    })
+    .catch(function() {
+        console.log('no search results for entered city state combo');
+        $('.search-results-list').append(`<p class="error-message">No results for ${cityInput}, ${stateInput}. Please fix city, state input.</p>`);
+        $('.search-results-section').show();
+    });
 }
 
 function displayDoResults(responseJson) {
@@ -240,7 +261,7 @@ function displayDoResults(responseJson) {
                 <p>Time: ${responseJson.events[i].datetime_local}</p>
                 <p>Location: ${responseJson.events[i].venue.name}</p>
                 <p>Location Address: ${responseJson.events[i].venue.address} ${responseJson.events[i].venue.city}, ${responseJson.events[i].venue.state}</p>
-                <p><a href = ${responseJson.events[i].url}>Buy Tickets Here!</a></p>
+                <p><a target="_blank" href = ${responseJson.events[i].url}>Buy Tickets Here!</a></p>
             </li>`
         );
     }
@@ -261,8 +282,19 @@ function callDoAPI() {
     console.log('calling do API');
     fetch(requestUrl)
     .then(response => response.json())
-    .then(responseJson => displayDoResults(responseJson))
-    // .catch(console.log(`Something went wrong`));
+    .then(responseJson => {
+        if (responseJson.events.length == 0) {
+            console.log('empty reponse array for restaurants');
+            throw new Error();
+        } else {
+            displayDoResults(responseJson);
+        }
+    })
+    .catch(function() {
+        console.log('no search results for entered city state combo');
+        $('.search-results-list').append(`<p class="error-message">No events for ${cityInput}, ${stateInput}. Please fix city, state, date input.</p>`);
+        $('.search-results-section').show();
+    });
 }
 
 
