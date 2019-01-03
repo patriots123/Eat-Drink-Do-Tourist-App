@@ -17,7 +17,7 @@ city on the date they picked. More things to do in later versions.
 ## Screenshots
 Landing Page/ Data Entry:
 
-![Landing Page/ Data Entry](Landing_Page.png)
+![Landing Page/ Data Entry](category_option_buttons.jpg)
 
 Category Choices:
 
