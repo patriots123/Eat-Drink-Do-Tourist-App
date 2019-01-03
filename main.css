@@ -1,6 +1,7 @@
 
 * {
     box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 html { 
@@ -9,7 +10,7 @@ html {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-  }
+}
 
 body {
     margin: 0;
@@ -26,6 +27,7 @@ nav {
 
 .error-message {
     color: red;
+    background-color: white;
 }
 
 h1 {
@@ -61,6 +63,13 @@ nav li {
     border: 1px solid white;
     background-color: white;
     color: royalblue;
+    font-size: 8pt;
+}
+
+@media screen and (min-width: 435px) {
+    .change-loc-nav-link, .choose-eat-drink-do-nav-link {
+        font-size: 11pt;
+    }
 }
 
 nav li::after {
@@ -73,6 +82,12 @@ nav button:hover {
 
 header {
     padding-top: 80px;
+}
+
+
+main {
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .eat-drink-do-selection-page, .category-options, .search-results-section, .change-loc-nav-link, .choose-eat-drink-do-nav-link, nav, .nav-title {
@@ -90,12 +105,27 @@ header {
 
 .home-page-title {
     color: royalblue;
-    margin-top: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     font-size: 24pt;
     text-align: center;
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
+}
+
+.page-description {
+    margin-top: 0px;
+}
+
+@media screen and (min-width: 321px) {
+    .home-page-title {
+        margin-top: 50px;
+        margin-bottom: 25px;
+    }
+    .page-description {
+        margin-top: 50px;
+    }
 }
 
 .home-page p {
@@ -108,25 +138,14 @@ header {
     padding-right: 15px;
 }
 
-.page-description {
-    margin-top: 50px;
-}
-
 .eat-drink-do-selection-page, .results-page {
     padding-top: 120px;
     text-align: center;
 }
 
-
-/* .eat-drink-do-selection-page {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-} */
-
 form {
     text-align: center;
-    margin-top: 50px;
+    margin-top: 0px;
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -168,14 +187,24 @@ form button {
 .category-button {
     border: 0px;
     padding: 40px;
-    margin-left: 5px;
-    margin-right: 5px;
-    width: 30%;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    width: 80%;
     text-align: center;
-    display: inline-block;
-    vertical-align:middle;
+    display: block;
     font-size: 30pt;
+}
+
+.eat-drink-do-selection-page {
+    max-width: 1000px
+}
+
+@media screen and (min-width: 720px) {
+    .category-button {
+        display: inline-block;
+        width: 30%;
+    }
 }
 
 .material-icons {
@@ -188,6 +217,7 @@ form button {
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 10px;
     padding-left: 15px;
     padding-right: 15px;
 }
@@ -203,6 +233,12 @@ form button {
 .category-option-types {
     text-align: center;
     padding:10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .category-option-type-button {
@@ -227,15 +263,17 @@ form button {
 
 .result-list-item {
     margin-bottom: 15px;
-    margin-top: 15px;
     box-shadow: 5px 5px cornflowerblue;
     border: 1px solid cornflowerblue;
     padding-left: 10px;
     background-color: white;
+    padding: 10px;
+    margin-bottom: 20px;
 }
 
 .result-list-item h3 {
     color: royalblue;
+    margin: 0;
 }
 
 .result-list-item p {

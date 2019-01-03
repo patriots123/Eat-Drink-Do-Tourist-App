@@ -18,13 +18,9 @@ function formatQueryParams(params) {
 
 function matchCityFromAPI(responseJson) {
     for (let i = 0; i < responseJson.location_suggestions.length; i++) {
-    console.log(responseJson.location_suggestions[i].name);
         if (responseJson.location_suggestions[i].name == `${cityInput}, ${stateInput}`) {
             zomatoCityID = responseJson.location_suggestions[i].id;
-            console.log(`Zomato CityID: ${zomatoCityID}`);
             break;
-        } else {
-            console.log('not a match');
         }
     }
 }
@@ -74,11 +70,9 @@ function handleNavBarLinks() {
 function handleLocationDateInput() {
     $('#location-data-entry').submit('click', event => {
         event.preventDefault();
-        console.log('submit location and date info clicked');
         cityInput = $('#submit-city-town').val();
         stateInput = $('#submit-state').val();
         dateInput = $('#submit-date').val();
-        console.log(`city: ${cityInput}, state: ${stateInput}, date: ${dateInput}`);
         $('.home-page').hide();
         $('nav').show();
         $('.eat-drink-do-selection-page').show();
@@ -105,9 +99,7 @@ function generateCategoryOptions() {
 //After user clicks Eat, Drink, or Do, save that choice and call function to generate the next option buttons
 function handleCategoryDecision() {
     $('.eat-drink-do-selection-page').on('click', '.category-button',function() {
-        console.log('category decision made');
         categoryChoice = $(this).attr('id');
-        console.log(categoryChoice);
         $('.eat-drink-do-selection-page').hide();
         $('.choose-eat-drink-do-nav-link').show();
         generateCategoryOptions();
@@ -119,7 +111,6 @@ function handleCategoryDecision() {
 //generate HTML for category option types (ex. Casual Dining under Restaurants)
 function generateCategoryOptionTypes() {
     $('.category-option-types').empty();
-    console.log(categoryChoice);
     if (categoryChoice == 'eat') {
         let keysForButtonTitles = Object.keys(categoryOptions[categoryChoice][categoryOptionChoice])
         for (let i = 0; i < keysForButtonTitles.length; i++) {
@@ -141,19 +132,12 @@ function generateCategoryOptionTypes() {
 //After user clicks one of the category option buttons, call function to generate last set of decision buttons
 function handleCategoryOptionDecision() {
     $('.category-options').on('click', '.category-option-button', function() {
-        console.log('category option decision made');
         categoryOptionChoice = $(this).attr('id');
-        console.log(categoryOptionChoice);
         generateCategoryOptionTypes();
     });
 }
 
-
-
-
-
 function displayEatResults(responseJson) {
-    console.log(categoryOptionChoice);
     $('.search-results-list').empty();
     for (let i = 0; i < responseJson.restaurants.length; i++) {
         if (categoryOptionChoice === 'Restaurants') {
@@ -190,18 +174,15 @@ function callEatAPI() {
     };
     const queryString = formatQueryParams(params)
     const requestUrl = apiInfo.zomato.searchBaseUrl + '?' + queryString;
-    console.log(requestUrl);
     const options = {
         headers: new Headers({
           "user-key": apiInfo.zomato.key,
         })
     };
-    console.log('calling eat API');
     fetch(requestUrl, options)
     .then(response => response.json())
     .then(responseJson => {
         if (zomatoCityID == undefined) {
-            console.log('empty reponse array for restaurants');
             throw new Error();
         } else {
             displayEatResults(responseJson);
@@ -232,27 +213,22 @@ function displayDrinkResults(responseJson) {
 
 function callDrinkAPI() {
     const requestUrl = apiInfo.beerMapping.loccityUrl + `${apiInfo.beerMapping.key}/${cityInput},${stateInput}&s=json`
-    console.log(requestUrl);
-    console.log('calling drink API');
-    fetch(requestUrl)
+    fetch(requestUrl, {mode: 'cors'})
     .then(response => response.json())
     .then(responseJson => {
         if (responseJson.length == 1) {
-            console.log('empty reponse array for restaurants');
             throw new Error();
         } else {
             displayDrinkResults(responseJson);
         }
     })
     .catch(function() {
-        console.log('no search results for entered city state combo');
         $('.search-results-list').append(`<p class="error-message">No results for ${cityInput}, ${stateInput}. Please fix city, state input.</p>`);
         $('.search-results-section').show();
     });
 }
 
 function displayDoResults(responseJson) {
-    console.log(responseJson);
     $('.search-results-list').empty();
     for (let i = 0; i < responseJson.events.length; i++) {
         $('.search-results-list').append(
@@ -277,21 +253,17 @@ function callDoAPI() {
     };
     const queryString = formatQueryParams(params)
     const requestUrl = apiInfo.seatGeek.eventsBaseUrl + '?' + queryString;
-    console.log(requestUrl);
-    
-    console.log('calling do API');
+
     fetch(requestUrl)
     .then(response => response.json())
     .then(responseJson => {
-        if (responseJson.events.length == 0) {
-            console.log('empty reponse array for restaurants');
+        if(responseJson.events.length == 0) {
             throw new Error();
         } else {
             displayDoResults(responseJson);
         }
     })
     .catch(function() {
-        console.log('no search results for entered city state combo');
         $('.search-results-list').append(`<p class="error-message">No events for ${cityInput}, ${stateInput}. Please fix city, state, date input.</p>`);
         $('.search-results-section').show();
     });
@@ -308,9 +280,7 @@ function getResultContent() {
 
 function handleCategoryOptionTypeDecision() {
     $('.category-option-types').on('click', '.category-option-type-button',function() {
-        console.log('category option type decision made');
         categoryOptionTypeChoice = $(this).attr('id');
-        console.log(categoryOptionTypeChoice);
         getResultContent();
     });
 }

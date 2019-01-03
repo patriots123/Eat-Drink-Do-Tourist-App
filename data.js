@@ -26,8 +26,7 @@ const categoryOptions = {
         ]
     },
     do: {
-        'Events': [],
-       // 'Attractions': []
+        'Events': []
     }
 }
 
