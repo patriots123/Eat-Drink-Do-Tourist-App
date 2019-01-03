@@ -18,23 +18,26 @@ city on the date they picked. More things to do in later versions.
 ## Screenshots
 Landing Page/ Data Entry:
 
-![Landing Page/ Data Entry](Desktop/Thinkful_Projects/API-capstone/Screenshots_for_README/category_option_buttons.jpg)
+![landing_page](https://user-images.githubusercontent.com/44987989/50667609-27403900-0f88-11e9-8559-20f4f6240276.jpg)
+
+Nav Buttons
+
+![nav_buttons](https://user-images.githubusercontent.com/44987989/50667631-3de69000-0f88-11e9-9be9-f6fc4bf91e10.jpg)
 
 Category Choices:
 
-[Category Choices](Desktop/Thinkful_Projects/API-capstone/Screenshots_for_README/Eat_Drink_Do_choice.jpg)
-
+![eat_drink_do_choice](https://user-images.githubusercontent.com/44987989/50667618-31face00-0f88-11e9-8c99-a76b0bf12ffc.jpg)
 Category Options:
 
-![Category Options](Desktop/Thinkful_Projects/API-capstone/Screenshots_for_README/category_option_buttons.jpg)
+![category_option_buttons](https://user-images.githubusercontent.com/44987989/50667621-34f5be80-0f88-11e9-9e36-9f8f7aab680e.jpg)
 
 Category Option Types:
 
-![Category Option Types](Desktop/Thinkful_Projects/API-capstone/Screenshots_for_README/category_option_buttons.jpg)
+![category_option_type_buttons](https://user-images.githubusercontent.com/44987989/50667630-3cb56300-0f88-11e9-85b1-6620db90f6f4.jpg)
 
 Search Results:
 
-![Search Results](Desktop/Thinkful_Projects/API-capstone/Screenshots_for_README/search_results.jpg)
+![search_results](https://user-images.githubusercontent.com/44987989/50667635-40e18080-0f88-11e9-88fc-70d1535e3856.jpg)
 
 ## Technologies Used
 
