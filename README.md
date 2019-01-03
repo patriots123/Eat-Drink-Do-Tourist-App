@@ -2,7 +2,7 @@
 
 ## Link
 
-[Eat, Drink, Go Web App](https://eat-drink-do--wshaughnessy.repl.co/)
+[Eat, Drink, Go Web App](https://eat-drink-do--wshaughnessy.repl.co/) </br>
 [Repository](https://github.com/patriots123/Eat-Drink-Do-Tourist-App)
 
 ## Summary
@@ -22,7 +22,7 @@ Landing Page/ Data Entry:
 
 Category Choices:
 
-[Category Choices](Desktop/Thinkful_Projects/API-capstone/Screenshots_for_README/category_option_buttons.jpg)
+[Category Choices](Desktop/Thinkful_Projects/API-capstone/Screenshots_for_README/Eat_Drink_Do_choice.jpg)
 
 Category Options:
 
@@ -31,6 +31,10 @@ Category Options:
 Category Option Types:
 
 ![Category Option Types](Desktop/Thinkful_Projects/API-capstone/Screenshots_for_README/category_option_buttons.jpg)
+
+Search Results:
+
+![Category Option Types](Desktop/Thinkful_Projects/API-capstone/Screenshots_for_README/search_results.jpg)
 
 ## Technologies Used
 
