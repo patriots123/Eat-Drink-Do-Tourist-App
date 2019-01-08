@@ -38,7 +38,7 @@ const apiInfo = {
         },
         beerMapping: {
             key: '76f32d8d9bfc0947e2c5af1270c13c76',
-            loccityUrl: 'http://beermapping.com/webservice/loccity/'
+            loccityUrl: 'https://beermapping.com/webservice/loccity/'
         },
         seatGeek: {
             key: 'MTQ2NTUxMjJ8MTU0NjEzOTkwNS4wNg',

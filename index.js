@@ -8,7 +8,6 @@ let categoryChoice;
 let categoryOptionChoice;
 let categoryOptionTypeChoice;
 
-
 function formatQueryParams(params) {
     const queryItems = Object.keys(params)
       .map(key => `${key}=${params[key]}`)
@@ -25,6 +24,7 @@ function matchCityFromAPI(responseJson) {
     }
 }
 
+//get city code from Zomato API to be used when fetching restaurants later
 function getZomatoCityID() {
     const params = {
         q: cityInput,
@@ -40,10 +40,9 @@ function getZomatoCityID() {
     fetch(requestUrl, options)
     .then(response => response.json())
     .then(responseJson => cityID = matchCityFromAPI(responseJson))
-    // .catch(console.log(`Something went wrong`));
 }
 
-
+//variable/ HTML alterations when either of nav buttons is clicked
 function handleNavBarLinks() {
     $('.change-loc-nav-link').on('click', function() {
         cityInput = '';
@@ -117,13 +116,15 @@ function generateCategoryOptionTypes() {
             $('.category-option-types').append(
                 `<button id='${keysForButtonTitles[i]}' class='category-option-type-button blue-button'>${keysForButtonTitles[i]}</button>`)
         }
-    } else if (categoryChoice == 'drink') {
+    } 
+    else if (categoryChoice == 'drink') {
         for (let i = 0; i < categoryOptions[categoryChoice][categoryOptionChoice].length; i++) {
             $('.category-option-types').append(
                 `<button id='${categoryOptions[categoryChoice][categoryOptionChoice][i]}' 
                 class='category-option-type-button blue-button'>${categoryOptions[categoryChoice][categoryOptionChoice][i]}</button>`)
         }
-    } else if (categoryChoice == 'do') {
+    } 
+    else if (categoryChoice == 'do') {
         callDoAPI();
     }
     $('.category-option-types').show();
@@ -137,6 +138,7 @@ function handleCategoryOptionDecision() {
     });
 }
 
+//display the results returned from zomato API. Different content from response JSON depending on category option type
 function displayEatResults(responseJson) {
     $('.search-results-list').empty();
     for (let i = 0; i < responseJson.restaurants.length; i++) {
@@ -160,11 +162,14 @@ function displayEatResults(responseJson) {
                     <p><a target="_blank" href = ${responseJson.restaurants[i].restaurant.url}</a>Check Out This Link For More Info!</p>
                 </li>`
             );
+            //NEW
         }
     }
     $('.search-results-section').show();
 }
 
+
+//call Zomato API for Eat results
 function callEatAPI() {
     const params = {
         city_id: zomatoCityID,
@@ -194,6 +199,8 @@ function callEatAPI() {
     });
 }
 
+
+//display results from beer map API
 function displayDrinkResults(responseJson) {
     $('.search-results-list').empty();
     for (let i = 0; i < responseJson.length; i++) {
@@ -211,7 +218,9 @@ function displayDrinkResults(responseJson) {
     $('.search-results-section').show();
 }
 
+//call beer mapping API for Drink results
 function callDrinkAPI() {
+    // callEatAPI();
     const requestUrl = apiInfo.beerMapping.loccityUrl + `${apiInfo.beerMapping.key}/${cityInput},${stateInput}&s=json`
     fetch(requestUrl, {mode: 'cors'})
     .then(response => response.json())
@@ -228,6 +237,7 @@ function callDrinkAPI() {
     });
 }
 
+//display results from seat geek API
 function displayDoResults(responseJson) {
     $('.search-results-list').empty();
     for (let i = 0; i < responseJson.events.length; i++) {
@@ -244,6 +254,7 @@ function displayDoResults(responseJson) {
     $('.search-results-section').show();
 }
 
+//Call seat geek API for Do results
 function callDoAPI() {
     const params = {
         client_id: apiInfo.seatGeek.key,
